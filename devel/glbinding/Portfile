@@ -8,7 +8,7 @@ PortGroup               github 1.0
 name                    glbinding
 categories              devel
 platforms               darwin
-maintainers             nomaintainer
+maintainers             {gmail.com:ken.cunningham.webuse @kencu} openmaintainer
 license                 MIT
 
 description             C++11 binding for OpenGL
