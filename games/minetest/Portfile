@@ -8,7 +8,7 @@ github.setup            minetest minetest 0.4.15
 checksums               rmd160  16cc8f27657d175d2dd81d162e925ba181f9fe39 \
                         sha256  7f879b7d0346a443a4be392d348d09ea5adfce670cbdec7756dc955d5b7548a5
 
-license                 GPL-3
+license                 GPL-2.1+
 categories              games
 platforms               darwin
 maintainers             gmail.com:ken.cunningham.webuse openmaintainer
