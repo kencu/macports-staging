@@ -10,7 +10,7 @@ version             20170509
 
 categories          devel
 platforms           darwin
-maintainers         gmail.com:ken.cunningham.webuse openmaintainer
+maintainers         {gmail.com:ken.cunningham.webuse @kencu} openmaintainer
 license             MIT
 
 description         Cross-platform C++ library providing tools for applications to locate \
