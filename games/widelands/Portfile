@@ -70,7 +70,7 @@ configure.args        -DCMAKE_INSTALL_PREFIX:PATH="${applications_dir}/Widelands
 
 variant useglbinding description "use glbinding instead of glew for OpenGL bindings" {
     depends_lib-delete        port:glew
-    depends_lib-append        path:lib/ibglbinding.dylib:glbinding
+    depends_lib-append        path:lib/libglbinding.dylib:glbinding
     configure.args-append     -DOPTION_USE_GLBINDING:BOOL=ON
 }
 
