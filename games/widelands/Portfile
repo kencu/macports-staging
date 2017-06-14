@@ -15,7 +15,6 @@ description         open-source real-time strategy game inspired by Settlers
 depends_lib         port:libsdl2 \
                     port:libsdl2_image \
                     port:libsdl2_mixer \
-                    port:libsdl2_net \
                     port:libsdl2_ttf \
                     port:boost \
                     port:doxygen \
@@ -37,6 +36,10 @@ if {${subport} eq ${name}} {
                         sha256  e511f9d26828a2b71b64cdfc6674e6e847543b2da73961ab882acca36c7c01a6
 
     conflicts           ${name}-devel
+    
+    # builds before 8377 required this
+    # to be deleted when release version is build20 or more
+    depends_lib-append  port:libsdl2_net
 
     long_description ${description}: \
         This port follows the release version of ${name}, which is typically updated every 6 months. If for some reason this port does not build or function as desired, try the ${name}-devel port.
@@ -44,28 +47,27 @@ if {${subport} eq ${name}} {
 } else {
 
     # devel
-    
     pre-fetch {
-    ui_msg "--->  Fetching source from bzr repository: this may take a while"
+        ui_msg "--->  Fetching source from bzr repository: this may take a while"
     }
 
     fetch.type          bzr
     bzr.url             lp:widelands
 
     version             20170607
-    # comment out for HEAD
     bzr.revision        8377
     
-    # no longer uses this aspect of libsdl2 as of 8377 (uses boost networking instead)
-    depends_lib-delete  port:libsdl2_net
-
+    variant HEAD description "build tip of commit tree" {
+        bzr.revision    -1
+    }
+    
     conflicts           ${name}
 
     long_description ${description}: \
         This port follows the master version of ${name}, which is typically updated every few weeks.
 }
 
-cmake.out_of_source yes
+cmake.out_of_source   yes
 configure.args        -DCMAKE_INSTALL_PREFIX:PATH="${applications_dir}/Widelands.app/Contents/MacOS"
 
 variant useglbinding description "use glbinding instead of glew for OpenGL bindings" {
