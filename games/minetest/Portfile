@@ -11,22 +11,22 @@ checksums               rmd160  16cc8f27657d175d2dd81d162e925ba181f9fe39 \
 license                 GPL-2.1+
 categories              games
 platforms               darwin
-maintainers             gmail.com:ken.cunningham.webuse openmaintainer
+maintainers             {gmail.com:ken.cunningham.webuse @kencu} openmaintainer
 description             open source infinite-world block sandbox game with survival and crafting
 long_description        ${description}.
 
 depends_lib-append      port:irrlicht \
-						port:jpeg \
-						port:libogg \
-						port:libvorbis \
-						port:freetype \
-						port:gettext \
-						port:leveldb \
-						port:hiredis \
-						port:curl \
-						port:luajit \
-						port:jsoncpp \
-						port:doxygen
+                        port:jpeg \
+                        port:libogg \
+                        port:libvorbis \
+                        port:freetype \
+                        port:gettext \
+                        port:leveldb \
+                        port:hiredis \
+                        port:curl \
+                        port:luajit \
+                        port:jsoncpp \
+                        port:doxygen
 
 # 001. the original build called fixup_bundle to move all the deps into the app bundle.
 #    this doesn't work correctly with macports destrooting, and isn't necessary for a macports install so deleted it
@@ -36,13 +36,13 @@ depends_lib-append      port:irrlicht \
 #    deleting that flag fixes the bug
 # 4. patch main.cpp to not barf on the unrecognized command-line option -psn from Apple launch
 
-patchfiles-append		001-patch-src-CMakeLists-disable-bundlefixup.diff
-patchfiles-append		002-patch-src-CMakeLists-include-LUADIR-before-system.diff
+patchfiles-append       001-patch-src-CMakeLists-disable-bundlefixup.diff
+patchfiles-append       002-patch-src-CMakeLists-include-LUADIR-before-system.diff
 patchfiles-append       003-patch-src-CMakeLists-disable-ffast-math.diff
-patchfiles-append		patch-ignore-psn-option-mac-bundle.diff
+patchfiles-append       patch-ignore-psn-option-mac-bundle.diff
 
 configure.args-append   -DCMAKE_BUILD_TYPE=Release \
-						-DCMAKE_INSTALL_PREFIX:PATH=${applications_dir} \
+                        -DCMAKE_INSTALL_PREFIX:PATH=${applications_dir} \
                         -DBUILD_CLIENT=1 \
                         -DENABLE_SOUND=1 \
                         -DENABLE_REDIS=1 \
