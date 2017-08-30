@@ -54,8 +54,8 @@ if {${subport} eq ${name}} {
     fetch.type          bzr
     bzr.url             lp:widelands
 
-    version             20170607
-    bzr.revision        8377
+    version             20170612
+    bzr.revision        8378
     
     variant HEAD description "build tip of commit tree" {
         bzr.revision    -1

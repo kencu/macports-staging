@@ -7,8 +7,9 @@ version             4.7
 license             MIT/X
 
 categories          x11
-maintainers         {gmail.com:ken.cunningham.webuse @kencu}
-description         dmenu is a dynamic menu for X, originally designed for dwm. It manages large numbers of user-defined menu items efficiently
+maintainers         {gmail.com:ken.cunningham.webuse @kencu} openmaintainer
+description         dmenu is a dynamic menu for X, originally designed for dwm. \
+     It manages large numbers of user-defined menu items efficiently.
 long_description    ${description}
 
 homepage            http://tools.suckless.org/${name}/
@@ -23,13 +24,13 @@ depends_build-append \
                     port:pkgconfig
 
 depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk \
-                    port:gtk3           
+                    port:gtk3
 
 use_configure       no
 
-patchfiles          patch-config-mk.diff
+patchfiles-append   patch-config-mk.diff
 
-platform darwin 10 {
+if {${os.platform} eq "darwin" && ${os.major} < 11} {
     depends_lib-append port:snowleopardfixes
     patchfiles-append  patch-add-snowleopardfixes.diff
 }
@@ -38,8 +39,8 @@ post-patch {
     reinplace "s|@@MACPORTS_PREFIX@@|${prefix}|g" ${worksrcpath}/config.mk
 }
 
-build.args          CC=${configure.cc}
-destroot.args       CC=${configure.cc}
+build.args          CC=${configure.cc} CXX=${configure.cxx}
+destroot.args       CC=${configure.cc} CXX=${configure.cxx}
                     
 livecheck.type      regex
 livecheck.url       ${master_sites}
