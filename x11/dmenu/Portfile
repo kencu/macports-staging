@@ -23,8 +23,9 @@ checksums           rmd160  7a45888f86862cdb475a1b75c6f3c35faeaf6300 \
 depends_build-append \
                     port:pkgconfig
 
-depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk \
-                    port:gtk3
+depends_lib-append  port:xorg-libXinerama \
+                    port:freetype \
+                    port:Xft2
 
 use_configure       no
 
