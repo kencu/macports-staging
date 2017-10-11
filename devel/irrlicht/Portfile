@@ -28,6 +28,13 @@ patchfiles-append       patch-pngpriv-zlib-test.diff
 # override default llvm compiler in xcode build & destroot settings to clang compiler
 patchfiles-append       patch-project-pbx-add-compiler-spec.diff
 
+# or could do this to force clang
+if { ${os.platform} eq "darwin" && ${os.major} < 11 } {
+#    xcode.build.settings-append GCC_VERSION=com.apple.compilers.llvm.clang.1_0
+}
+
+
+
 xcode.project           ${worksrcpath}/source/Irrlicht/MacOSX/MacOSX.xcodeproj
 xcode.configuration     Release
 xcode.build.settings    SYMROOT=build CLANG_CXX_LIBRARY=${configure.cxx_stdlib}
@@ -45,4 +52,10 @@ post-destroot {
     # add  traditional paths for software that expects to find irrlicht in the headers & libs folders
     ln -s ${prefix}/Library/Frameworks/IrrFramework.framework/Versions/A/Headers ${destroot}${prefix}/include/irrlicht
     ln -s ${prefix}/Library/Frameworks/IrrFramework.framework/Versions/A/IrrFramework ${destroot}${prefix}/lib/libIrrlicht.dylib
+
+    # copy in documentation
+    xinstall -d ${destroot}${prefix}/share/${name}
+    copy ${worksrcpath}/doc ${destroot}${prefix}/share/${name}/
+    delete ${destroot}${prefix}/share/${name}/doc/docu
+
 }
