@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 
 PortSystem          1.0
-PortGroup           cmake 1.0
-PortGroup           cxx11 1.0
+PortGroup           cmake 1.1
+PortGroup           cxx11 1.1
 PortGroup           github 1.0
 
 github.setup        cginternals cpplocate 25ed8cd6e12c3cd5790dfba5dd743d9476b23dce
@@ -10,7 +10,7 @@ version             20170509
 
 categories          devel
 platforms           darwin
-maintainers         {gmail.com:ken.cunningham.webuse @kencu} openmaintainer
+maintainers         {kencu @kencu} openmaintainer
 license             MIT
 
 description         Cross-platform C++ library providing tools for applications to locate \
@@ -21,7 +21,6 @@ checksums           rmd160  b3bce9f31c09bc5cb1ec0c72928bc2db59bd1698 \
                     sha256  86648294fde0f523cc5c4ea18b6801d9fd25c0b259ac5016021723cc4287d00c
                     
 configure.args-append -DBUILD_SHARED_LIBS:BOOL=ON
-cmake.out_of_source yes
 
 # override folder layout logic to match macports expectations
 patchfiles-append   001-patch-cpplocate-cmake-installdirs.diff
@@ -29,4 +28,12 @@ patchfiles-append   001-patch-cpplocate-cmake-installdirs.diff
 variant docs description "install documentation" {
     configure.args-append   -DOPTION_BUILD_DOCS:BOOL=ON
     depends_build-append    port:doxygen
+}
+
+post-destroot {
+#    xinstall -d ${destroot}${prefix}/lib/cmake/cpplocate
+#    move ${destroot}${prefix}/share/cpplocate/cmake ${destroot}${prefix}/lib/cmake/cpplocate
+#    move ${destroot}${prefix}/share/cpplocate/cpplocate-config.cmake ${destroot}${prefix}/lib/cmake/cpplocate
+#    move ${destroot}${prefix}/lib/cmake/cpplocate/cmake/ModuleInformation.cmake ${destroot}${prefix}/lib/cmake/cpplocate/ModuleInformation.cmake
+#    delete ${destroot}${prefix}/lib/cmake/cpplocate/cmake/
 }
